@@ -1,13 +1,12 @@
-if __name__ == '__main__':
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.abspath(os.curdir)))
+from pony.orm import (
+    PrimaryKey, Required, Optional
+)
 
 # Own
-from database.base import *
+from base import engine, Auditable
 
 
-class User(DB.Entity):
+class User(Auditable, engine.Entity):
     """docstring for User"""
     id_user = PrimaryKey(int, auto=True)
     name = Required(str)
@@ -15,5 +14,4 @@ class User(DB.Entity):
     email = Required(str, 64, unique=True)
     phone = Optional(str)
     status = Required(bool)
-    timestamp = Required(datetime)
     password = Required(str)

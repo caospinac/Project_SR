@@ -15,7 +15,7 @@ from models import Nutrients
 from models import PriceFertilizer
 from models import Recomendation
 from models import User
-from base import DB
+from base import engine
 
 
-DB.generate_mapping(create_tables=True)
+engine.generate_mapping(create_tables=True)

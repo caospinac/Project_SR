@@ -1,13 +1,9 @@
-if __name__ == '__main__':
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.abspath(os.curdir)))
+from pony.orm import PrimaryKey, Optional, Required
 
-# Own
-from database.base import *
+from base import engine
 
 
-class Nutrients(DB.Entity):
+class Nutrients(engine.Entity):
     """docstring for User"""
     id_nutrient = PrimaryKey(int, auto=True)
     potassium = Optional(float)

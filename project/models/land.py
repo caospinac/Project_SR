@@ -1,13 +1,9 @@
-if __name__ == '__main__':
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.abspath(os.curdir)))
+from pony.orm import Set, PrimaryKey, Optional, Required
 
-# Own
-from database.base import *
+from base import engine
 
 
-class Land(DB.Entity):
+class Land(engine.Entity):
     """docstring for User"""
     # id_usuario = PrimaryKey(int, auto=True)
     id_land = PrimaryKey(int, auto=True)

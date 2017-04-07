@@ -1,13 +1,9 @@
-if __name__ == '__main__':
-    import sys
-    import os
-    sys.path.append(os.path.dirname(os.path.abspath(os.curdir)))
+from pony.orm import Set, PrimaryKey, Optional, Required
 
-# Own
-from database.base import *
+from base import engine
 
 
-class Lot(DB.Entity):
+class Lot(engine.Entity):
     """docstring for Lot"""
     id_lot = PrimaryKey(int, auto=True)
     name = Required(str)
