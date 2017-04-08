@@ -1,11 +1,9 @@
-from pony.orm import Set, Optional, Required, PrimaryKey
+from pony.orm import Set, Required
 
-from .base import engine
+from .base import Auditable
 
 
-class Lab(engine.Entity):
-    """docstring for Lot"""
-    id_lab = PrimaryKey(int, auto=True)
-    name = Required(str)
-    phone = Optional(str, 10)
-    prices_fertilizer = Set("PriceFertilizer")
+class Lab(Auditable):
+    lab_name = Required(str, 40)
+    lab_phone = Required(str, 13)
+    fertilizer_prices = Set('FertilizerPrice')

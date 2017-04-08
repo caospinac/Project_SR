@@ -1,12 +1,9 @@
-from pony.orm import PrimaryKey, Required
+from pony.orm import Required
 
-from .base import engine
-from .nutrients import Nutrients
+from .nutrient_set import Nutrient_set
 
 
-class OptimalRangeAge(Nutrients, engine.Entity):
-    """docstring for Lot"""
-    id_ora = PrimaryKey(int, auto=True)
-    crop = Required("Crop")
-    minimum = Required(float)
-    maximum = Required(float)
+class Optimal_range_age(Nutrient_set):
+    min = Required(float)
+    max = Required(float)
+    crop = Required('Crop')

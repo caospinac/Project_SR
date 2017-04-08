@@ -1,5 +1,4 @@
 cffi==1.10.0
 pony==0.7.1
-psycopg2cffi==2.7.5
 pycparser==2.17
 six==1.10.0

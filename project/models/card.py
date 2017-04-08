@@ -1,11 +1,12 @@
-from pony.orm import Required, Set, PrimaryKey
-from .base import Auditable, engine
+from datetime import datetime
 
-from .nutrients import Nutrients
+from pony.orm import Required, Set
+
+from .nutrient_set import Nutrient_set
 
 
-class Card(Auditable, Nutrients, engine.Entity):
-    """docstring for Lot"""
-    id_card = PrimaryKey(int, auto=True)
-    recomendations = Set("Recomendation")
-    lot = Required("Lot")
+class Card(Nutrient_set):
+    crop_age = Required(float)
+    date = Required(datetime, sql_default='CURRENT_TIMESTAMP')
+    lot = Required('Lot')
+    recomendations = Set('Recomendation')

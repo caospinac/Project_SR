@@ -1,16 +1,16 @@
-from models import Admin
 from models import Card
-from models import Client
 from models import Crop
 from models import Fertilizer
+from models import FertilizerPrice
 from models import Lab
 from models import Land
 from models import Lot
-from models import Nutrients
-from models import PriceFertilizer
+from models import Nutrient_set
+from models import Optimal_range_age
 from models import Recomendation
 from models import User
-from models.base import engine
+from models.base import db
 
 
-engine.generate_mapping(create_tables=True)
+db.bind("sqlite", "database.sqlite", create_db=True)
+db.generate_mapping(create_tables=True)

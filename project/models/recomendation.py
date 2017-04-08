@@ -1,13 +1,9 @@
-from datetime import datetime
+from pony.orm import Required, Optional
 
-from pony.orm import Required
-
-from .base import engine
+from .base import Auditable
 
 
-class Recomendation(engine.Entity):
-    """docstring for Lot"""
-    date = Required(datetime)
-    score = Required(float)
-    card = Required("Card")
-    fertilizer = Required("Fertilizer")
+class Recomendation(Auditable):
+    score = Required(float, sql_default='NULL')
+    card = Required('Card')
+    fertilizer = Optional('Fertilizer')

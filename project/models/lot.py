@@ -1,14 +1,10 @@
-from pony.orm import Set, PrimaryKey, Optional, Required
+from pony.orm import Set, Optional, Required
 
-from .base import engine
+from .base import Auditable
 
 
-class Lot(engine.Entity):
-    """docstring for Lot"""
-    id_lot = PrimaryKey(int, auto=True)
-    name = Required(str)
+class Lot(Auditable):
+    lot_name = Optional(str, 40)
     size = Required(float)
-    status = Required(bool)
-    cards = Set("Card")
-    land = Optional("Land")
-    crops = Optional("Crop")
+    crop = Required('Crop')
+    cards = Set('Card')

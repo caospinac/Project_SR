@@ -1,34 +1,12 @@
-from pony.orm import (
-    Database, PrimaryKey, Required, Optional
-)
-
-from pony import orm
-
-
 from datetime import datetime
+from pony.orm import *
 
 
-engine = Database()
-engine.bind(
-    'sqlite', 'database.sqlite', create_db=True
-)
-orm.sql_debug(True)
+db = Database()
 
 
-class Auditable(object):
-    """docstring for Auditable"""
-    created = Required(
-        datetime,
-        default=datetime.utcnow
-    )
-
-
-class User(Auditable):
-    """docstring for User"""
-    id_user = PrimaryKey(int, auto=True)
-    name = Required(str)
-    lastname = Required(str)
-    email = Required(str, 64, unique=True)
-    phone = Optional(str)
-    status = Required(bool)
-    password = Required(str)
+class Auditable(db.Entity):
+    id = PrimaryKey(int, auto=True)
+    created = Required(datetime, sql_default='CURRENT_TIMESTAMP')
+    modified = Optional(datetime, sql_default='CURRENT_TIMESTAMP')
+    active = Required(bool, default=True)

@@ -1,12 +1,9 @@
-from pony.orm import PrimaryKey, Required, Set
-# Own
+from pony.orm import Required, Set
 
-from .base import engine
+from .base import Auditable
 
 
-class Crop(engine.Entity):
-    """docstring for Lot"""
-    id_crop = PrimaryKey(int, auto=True)
-    name = Required(str)
-    lots = Set("Lot")
-    optimals_range_age = Set("OptimalRangeAge")
+class Crop(Auditable):
+    crop_name = Required(str, 40)
+    lots = Set('Lot')
+    optimals_range_age = Set('Optimal_range_age')

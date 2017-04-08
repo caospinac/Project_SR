@@ -1,17 +1,17 @@
-from pony.orm import PrimaryKey, Optional, Required
+from pony.orm import PrimaryKey, Optional
 
-from .base import engine
+from .base import db
 
 
-class Nutrients(object):
-    """docstring for User"""
+class Nutrient_set(db.Entity):
+    id = PrimaryKey(int, auto=True)
     potassium = Optional(float)
-    match = Optional(float)
+    phosphorus = Optional(float)
     nitrogen = Optional(float)
     organic_material = Optional(float)
     acidity = Optional(float)
     magnesium = Optional(float)
-    Manganese = Optional(float)
+    nanganese = Optional(float)
     copper = Optional(float)
     sulfur = Optional(float)
     aluminum = Optional(float)

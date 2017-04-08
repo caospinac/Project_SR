@@ -1,17 +1,15 @@
 from pony.orm import (
-    PrimaryKey, Required, Optional
+    Required, Optional, Set
 )
 
-# Own
-from .base import engine, Auditable
+from .base import Auditable
 
 
-class User(Auditable, engine.Entity):
-    """docstring for User"""
-    id_user = PrimaryKey(int, auto=True)
-    name = Required(str)
-    lastname = Required(str)
+class User(Auditable):
+    admin = Required(bool, default=True)
+    firstname = Required(str, 40)
+    lastname = Required(str, 40)
     email = Required(str, 64, unique=True)
-    phone = Optional(str)
-    status = Required(bool)
+    phone = Optional(str, 13)
     password = Required(str)
+    lands = Set("Land", cascade_delete=True)
