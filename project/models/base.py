@@ -10,9 +10,7 @@ from datetime import datetime
 
 engine = Database()
 engine.bind(
-    'postgres',
-    user='postgres', password='pgsql',
-    host='localhost', database='fertilagro'
+    'sqlite', 'database.sqlite', create_db=True
 )
 orm.sql_debug(True)
 

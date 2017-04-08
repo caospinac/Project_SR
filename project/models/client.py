@@ -1,6 +1,6 @@
 from pony.orm import Set
 
-from user import User
+from .user import User
 
 
 class Client(User):

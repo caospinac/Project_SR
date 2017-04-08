@@ -1,11 +1,10 @@
 from pony.orm import PrimaryKey, Optional, Required
 
-from base import engine
+from .base import engine
 
 
-class Nutrients(engine.Entity):
+class Nutrients(object):
     """docstring for User"""
-    id_nutrient = PrimaryKey(int, auto=True)
     potassium = Optional(float)
     match = Optional(float)
     nitrogen = Optional(float)

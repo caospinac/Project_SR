@@ -1,6 +1,6 @@
 from pony.orm import Set, PrimaryKey, Optional, Required
 
-from base import engine
+from .base import engine
 
 
 class Lot(engine.Entity):
@@ -10,5 +10,5 @@ class Lot(engine.Entity):
     size = Required(float)
     status = Required(bool)
     cards = Set("Card")
-    land = Required("Land")
-    card = Optional("Card")
+    land = Optional("Land")
+    crops = Optional("Crop")

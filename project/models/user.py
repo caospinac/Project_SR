@@ -3,7 +3,7 @@ from pony.orm import (
 )
 
 # Own
-from base import engine, Auditable
+from .base import engine, Auditable
 
 
 class User(Auditable, engine.Entity):

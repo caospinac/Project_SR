@@ -1,6 +1,6 @@
 from pony.orm import Set, Optional, Required, PrimaryKey
 
-from base import engine
+from .base import engine
 
 
 class Lab(engine.Entity):

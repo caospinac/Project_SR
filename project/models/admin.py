@@ -1,7 +1,6 @@
-from .base import engine
-from user import User
+from .user import User
 
 
-class Admin(engine.Entity, User):
+class Admin(User):
     """docstring for Lot"""
     pass
