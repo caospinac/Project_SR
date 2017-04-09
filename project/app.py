@@ -1,4 +1,6 @@
+from jinja2 import Environment, PackageLoader
 from sanic import Sanic
+from sanic.response import html
 
 
 app = Sanic(__name__)
@@ -11,7 +13,7 @@ env = Environment(
 @app.route("/", methods=['GET', 'POST'])
 async def index(request):
     view = env.get_template("index.html")
-    html_content = view.render()
+    html_content = view.render(data="Hello world")
     return html(html_content)
 
 
