@@ -1,9 +1,9 @@
 from pony.orm import PrimaryKey, Optional
 
-from .base import db
+from .base import engine
 
 
-class Nutrient_set(db.Entity):
+class Nutrient_set(engine.Entity):
     id = PrimaryKey(int, auto=True)
     potassium = Optional(float)
     phosphorus = Optional(float)
