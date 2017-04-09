@@ -1,8 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 setup(
-    name='project_sr',
+    name='project',
+    packages=find_packages(),
+    namespace_packages=['project'],
     version='0.1dev',
     description='System of recommendation for the Agro',
     long_description=open('README.md').read(),

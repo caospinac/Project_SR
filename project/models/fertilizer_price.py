@@ -1,8 +1,8 @@
 from pony.orm import Required
 
-from .base import db
+from .base import engine
 
 
-class FertilizerPrice(db.Entity):
+class FertilizerPrice(engine.Entity):
     lab = Required('Lab')
     fertilizer = Required('Fertilizer')

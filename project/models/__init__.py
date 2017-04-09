@@ -9,4 +9,4 @@ from .nutrient_set import Nutrient_set
 from .optimal_range_age import Optimal_range_age
 from .recomendation import Recomendation
 from .user import User
-from .base import db, Auditable
+from .base import engine
