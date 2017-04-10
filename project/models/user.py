@@ -6,7 +6,7 @@ from .base import Auditable
 
 
 class User(Auditable):
-    admin = Required(bool, default=True)
+    admin = Required(bool, default=False)
     firstname = Required(str, 40)
     lastname = Required(str, 40)
     email = Required(str, 64, unique=True)
