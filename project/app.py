@@ -1,7 +1,11 @@
 from jinja2 import Environment, PackageLoader
+from pony import orm
 from sanic import Sanic
 from sanic.response import html
+from sanic_cors import CORS
+
 from routes import view_route_list
+from models.base import engine
 
 
 app = Sanic(__name__)
@@ -19,10 +23,16 @@ async def index(request):
 
 
 for view_route in view_route_list:
+    CORS(app)
     app.add_route(*view_route)
 
 
 if __name__ == "__main__":
+    orm.sql_debug(True)
+
+    engine.bind("sqlite", "database.sqlite", create_db=True)
+    engine.generate_mapping(create_tables=True)
+
     app.run(
         debug=True,
         host="0.0.0.0",
