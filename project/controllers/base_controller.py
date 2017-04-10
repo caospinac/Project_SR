@@ -15,8 +15,8 @@ class BaseController(HTTPMethodView):
     def post(self, request):
         return json({
             'error': {
-                'code': 'TITLE_REQUIRED',
-                'message': 'The title field is required',
+                'code': 'FIELD_REQUIRED',
+                'message': 'A field is required',
             }
         }, status=400)
 
