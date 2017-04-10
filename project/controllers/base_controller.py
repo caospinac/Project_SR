@@ -2,7 +2,7 @@ from sanic.views import HTTPMethodView
 from sanic.response import json
 
 
-class BaseController(HTTPMethodView):
+class BaseController(HTTPMethodView):       
 
     def get(self, request):
         return json({

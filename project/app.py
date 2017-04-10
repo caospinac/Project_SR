@@ -1,6 +1,7 @@
 from jinja2 import Environment, PackageLoader
 from sanic import Sanic
 from sanic.response import html
+from routes import view_route_list
 
 
 app = Sanic(__name__)
@@ -15,6 +16,10 @@ async def index(request):
     view = env.get_template("index.html")
     html_content = view.render(data="Hello world")
     return html(html_content)
+
+
+for view_route in view_route_list:
+    app.add_route(*view_route)
 
 
 if __name__ == "__main__":
