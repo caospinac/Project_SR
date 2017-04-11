@@ -3,8 +3,8 @@ from pony.orm import PrimaryKey, Optional
 from .base import engine
 
 
-class Nutrient_set(engine.Entity):
-    id = PrimaryKey(int, auto=True)
+class NutrientSet(engine.Entity):
+    id = PrimaryKey(str, 32)
     potassium = Optional(float)
     phosphorus = Optional(float)
     nitrogen = Optional(float)

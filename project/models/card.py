@@ -2,10 +2,10 @@ from datetime import datetime
 
 from pony.orm import Required, Set
 
-from .nutrient_set import Nutrient_set
+from .nutrient_set import NutrientSet
 
 
-class Card(Nutrient_set):
+class Card(NutrientSet):
     crop_age = Required(float)
     date = Required(datetime, sql_default='CURRENT_TIMESTAMP')
     lot = Required('Lot')

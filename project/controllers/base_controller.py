@@ -1,8 +1,7 @@
-import functools
+from http import HTTPStatus
 
 from sanic.views import HTTPMethodView
 from sanic.response import json
-from http import HTTPStatus
 
 
 class BaseController(HTTPMethodView):

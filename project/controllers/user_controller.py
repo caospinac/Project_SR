@@ -1,4 +1,5 @@
-from sanic.response import json
+from uuid import uuid4
+
 from .base_controller import BaseController
 from pony.orm import db_session, exists
 
@@ -12,6 +13,7 @@ class UserController(BaseController):
         with db_session:
             try:
                 User(
+                    id=uuid4().hex,
                     firstname=req.get('firstname'),
                     lastname=req.get('lastname'),
                     email=req.get('email'),
