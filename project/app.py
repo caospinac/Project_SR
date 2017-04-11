@@ -27,14 +27,17 @@ for view_route in view_route_list:
     app.add_route(*view_route)
 
 
+orm.sql_debug(True)
+
 if __name__ == "__main__":
-    orm.sql_debug(True)
-
     engine.bind("sqlite", "database.sqlite", create_db=True)
-    engine.generate_mapping(create_tables=True)
+else:
+    engine.bind("sqlite", "test.sqlite", create_db=True)
 
-    app.run(
-        debug=True,
-        host="0.0.0.0",
-        port=8000
-    )
+engine.generate_mapping(create_tables=True)
+
+app.run(
+    debug=True,
+    host="0.0.0.0",
+    port=8000
+)
