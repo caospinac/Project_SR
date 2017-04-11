@@ -22,8 +22,6 @@ class UserController(BaseController):
             except Exception as e:
                 print(e)
                 return self.response_status(409)
-            except Exception as e:
-                print(e)
         return self.response_status(201)
 
     async def get(self, request, id):
