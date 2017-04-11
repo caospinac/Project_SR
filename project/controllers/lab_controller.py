@@ -3,5 +3,5 @@ from .base_controller import BaseController
 
 
 class LabController(BaseController):
-    def get(self, request):
+    async def get(self, request, arg):
         return json({'Lab': 'controller'})

@@ -3,5 +3,5 @@ from .base_controller import BaseController
 
 
 class LandController(BaseController):
-    def get(self, request):
+    async def get(self, request, arg):
         return json({'Land': 'controller'})

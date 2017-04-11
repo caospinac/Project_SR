@@ -3,5 +3,5 @@ from .base_controller import BaseController
 
 
 class RecomendationController(BaseController):
-    def get(self, request):
+    async def get(self, request, arg):
         return json({'Recomendation': 'controller'})

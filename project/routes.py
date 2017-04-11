@@ -14,6 +14,7 @@ from controllers import UserController
 
 view_route_list = [
     (BaseController.as_view(), '/base'),
+    (BaseController.as_view(), '/base/<arg>'),
     (CardController.as_view(), '/card'),
     (CropController.as_view(), '/crop'),
     (FertilizerController.as_view(), '/fertilizer'),
@@ -25,4 +26,5 @@ view_route_list = [
     (OptimalRangeAgeController.as_view(), '/optimal_range_age'),
     (RecomendationController.as_view(), '/recomendation'),
     (UserController.as_view(), '/user'),
+    (UserController.as_view(), '/user/<id>'),
 ]

@@ -3,5 +3,5 @@ from .base_controller import BaseController
 
 
 class NutrientSetController(BaseController):
-    def get(self, request):
+    async def get(self, request, arg):
         return json({'NutrientSet': 'controller'})
