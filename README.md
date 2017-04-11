@@ -57,4 +57,4 @@ python project/app.py
 2017-04-11 14:48:38,285: INFO: Goin' Fast @ http://0.0.0.0:8000
 2017-04-11 14:48:38,422: INFO: Starting worker [19659]
 ```
-Go to <a target="_blank">http://0.0.0.0:8000</a>
+Go to http://0.0.0.0:8000
