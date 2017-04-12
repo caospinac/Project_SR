@@ -10,8 +10,10 @@ class UserController(BaseController):
     async def post(self, request):
         req = request.form
         print(request.form)
-        with db_session:
-            try:
+        try:
+            with db_session:
+                if exists(u for u in User if u.email == req.get('email')):
+                    return self.response_status(409)
                 User(
                     id=uuid4().hex,
                     firstname=req.get('firstname'),
@@ -21,8 +23,8 @@ class UserController(BaseController):
                     password=req.get('password'),
                     lands=[],
                 )
-            except Exception as e:
-                return self.response_status(409)
+        except Exception as e:
+            return super().post(request, None)
         return self.response_status(201)
 
     async def get(self, request, id):
@@ -52,7 +54,6 @@ class UserController(BaseController):
         return self.response_status(204)
 
     async def delete(self, request, id):
-        req = request.form
         with db_session:
             if not exists(u for u in User if u.id == id):
                 return self.response_status(404)
