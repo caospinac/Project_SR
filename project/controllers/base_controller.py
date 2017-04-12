@@ -21,16 +21,16 @@ class BaseController(HTTPMethodView):
             return json({})
 
     async def post(self, request, arg):
-        return self.__response_status(501)
+        return self.response_status(501)
 
     async def get(self, request, arg):
-        return self.__response_status(501)
+        return self.response_status(501)
 
     async def put(self, request, arg):
-        return self.__response_status(501)
+        return self.response_status(501)
 
     async def patch(self, request, arg):
-        return self.__response_status(501)
+        return self.response_status(501)
 
     async def delete(self, request, arg):
         return self.response_status(501)
