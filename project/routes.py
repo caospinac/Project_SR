@@ -26,5 +26,5 @@ view_route_list = [
     (OptimalRangeAgeController.as_view(), '/optimal_range_age'),
     (RecomendationController.as_view(), '/recomendation'),
     (UserController.as_view(), '/user'),
-    (UserController.as_view(), '/user/<id>'),
+    (UserController.as_view(), '/user/<id:\w{32}>'),
 ]

@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 from .base_controller import BaseController
-from pony.orm import db_session, exists
+from pony.orm import db_session
 
 from models import User
 
@@ -12,7 +12,7 @@ class UserController(BaseController):
         print(request.form)
         try:
             with db_session:
-                if exists(u for u in User if u.email == req.get('email')):
+                if not User.exists(email=req.get('email')):
                     return self.response_status(409)
                 User(
                     id=uuid4().hex,
@@ -29,16 +29,17 @@ class UserController(BaseController):
 
     async def get(self, request, id):
         with db_session:
-            if not exists(u for u in User if u.id == id):
+            if not User.exists(id=id):
                 return self.response_status(404)
             return self.response_status(200, User[id])
 
     async def patch(self, request, id):
         req = request.form
         with db_session:
-            if not exists(u for u in User if u.id == id):
+            if not User.exists(id=id):
                 return self.response_status(404)
             try:
+                User.get_for_update(id=id)
                 User[id].set(
                     firstname=req.get('firstname'),
                     lastname=req.get('lastname'),
@@ -47,15 +48,13 @@ class UserController(BaseController):
                     password=req.get('password'),
                     lands=[],
                 )
-            except Exception as e:
-                pass
-            else:
                 return self.response_status(200, User[id])
-        return self.response_status(204)
+            except Exception as e:
+                return self.response_status(202)
 
     async def delete(self, request, id):
         with db_session:
-            if not exists(u for u in User if u.id == id):
+            if not User.exists(id=id):
                 return self.response_status(404)
             try:
                 User[id].set(
