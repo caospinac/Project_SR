@@ -1,6 +1,6 @@
 import sys
 
-from app import app
+from app import app, orm, engine
 
 
 def test_post_user():
@@ -77,6 +77,20 @@ def test_patch_user_if_not_exists():
 
 
 if __name__ == '__main__':
+    orm.sql_debug(True)
+    try:
+        engine.bind("sqlite", "tests.sqlite", create_db=True)
+    except Exception as e:
+        pass
+    else:
+        engine.generate_mapping(create_tables=True)
+
+    app.run(
+        debug=True,
+        host=".0.0.0.0",
+        port=8888
+    )
+
     try:
         globals()[sys.argv[1]]()
     except AssertionError as e:
