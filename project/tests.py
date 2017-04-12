@@ -48,17 +48,32 @@ def test_get_user_if_not_exists():
 
 
 def test_patch_user():
-    req, res = app.test_client.get(
-        '/user/1',
+    req, res = app.test_client.patch(
+        '/user/d705a98f06a040bf9952db941681b3ee',
         data={
-            "firstname": "paco",
-            "lastname": "páez",
-            "email": "paco-paez@test.com",
+            "firstname": "Perengano",
+            "lastname": "Primero",
+            "email": "perengano1@test.com",
             "phone": "3333333333",
             "password": "mypassword"
         }
     )
     assert res.status == 200
+
+
+def test_patch_user_if_not_exists():
+    req, res = app.test_client.patch(
+        '/user/d705a98f06a040bf9952db941681b3iii',
+        data={
+            "firstname": "Perengano",
+            "lastname": "Primero",
+            "email": "perengano1@test.com",
+            "phone": "3333333333",
+            "password": "mypassword"
+        }
+    )
+    print(res.status)
+    assert res.status == 404
 
 
 if __name__ == '__main__':
