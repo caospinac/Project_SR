@@ -1,15 +1,17 @@
-from controllers import BaseController
-from controllers import CardController
-from controllers import CropController
-from controllers import FertilizerController
-from controllers import FertilizerPriceController
-from controllers import LabController
-from controllers import LandController
-from controllers import LotController
-from controllers import NutrientSetController
-from controllers import OptimalRangeAgeController
-from controllers import RecomendationController
-from controllers import UserController
+from controllers import (
+    BaseController,
+    CardController,
+    CropController,
+    FertilizerController,
+    FertilizerPriceController,
+    LabController,
+    LandController,
+    LotController,
+    NutrientSetController,
+    OptimalRangeAgeController,
+    RecomendationController,
+    UserController
+)
 
 
 view_route_list = [
