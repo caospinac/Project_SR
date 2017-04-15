@@ -29,4 +29,5 @@ view_route_list = [
     (RecomendationController.as_view(), '/recomendation'),
     (UserController.as_view(), '/user'),
     (UserController.as_view(), '/user/<id:\w{32}>'),
+    (UserController.as_view(), '/user/<id:all>'),
 ]
