@@ -9,7 +9,7 @@ from models.base import engine
 
 
 app = Sanic(__name__)
-app.static("/static", "./static")
+app.static("/", "./static")
 env = Environment(
     loader=PackageLoader("app", "views"),
 )
