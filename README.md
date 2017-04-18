@@ -23,7 +23,7 @@ source venv/bin/activate
 ### Install requeriments
 ```
 pip install --upgrade pip
-pip install -r requeriments.txt
+pip install -r requirements.txt
 ```
 ### Run
 ```
