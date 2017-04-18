@@ -17,7 +17,7 @@ env = Environment(
 
 @app.route("/", methods=['GET', 'POST'])
 async def index(request):
-    view = env.get_template("index.html")
+    view = env.get_template("base.html")
     html_content = view.render(data="Hello world")
     return html(html_content)
 
