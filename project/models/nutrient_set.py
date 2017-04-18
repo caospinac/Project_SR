@@ -1,4 +1,4 @@
-from pony.orm import PrimaryKey, Optional
+from pony.orm import Optional, PrimaryKey
 
 from .base import engine
 
