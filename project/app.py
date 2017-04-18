@@ -9,7 +9,8 @@ from models.base import engine
 
 
 app = Sanic(__name__)
-app.static("/", "./static")
+app.static("/", "./project/static/")
+
 env = Environment(
     loader=PackageLoader("app", "views"),
 )
@@ -18,7 +19,7 @@ env = Environment(
 @app.route("/", methods=['GET', 'POST'])
 async def index(request):
     view = env.get_template("base.html")
-    html_content = view.render(data="Hello world")
+    html_content = view.render()
     return html(html_content)
 
 
