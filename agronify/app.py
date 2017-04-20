@@ -16,7 +16,7 @@ from models.base import engine
 
 
 app = Sanic(__name__)
-app.static("/", "./project/static/")
+app.static("/", "./agronify/static/")
 
 env = Environment(
     loader=PackageLoader("app", "views"),
