@@ -1,9 +1,16 @@
 from jinja2 import Environment, PackageLoader
 from pony import orm
 from sanic import Sanic
-from sanic.response import html
+from sanic.exceptions import NotFound, FileNotFound
+from sanic.response import html, json
 from sanic_cors import CORS
 
+from config import (
+    HOST, PORT, DEBUG,
+    DB_CLIENT, DB_NAME,
+    SQL_DEBUG
+)
+from controllers import BaseController
 from routes import view_route_list
 from models.base import engine
 
@@ -14,6 +21,11 @@ app.static("/", "./project/static/")
 env = Environment(
     loader=PackageLoader("app", "views"),
 )
+
+
+@app.exception(NotFound, FileNotFound)
+def ignore_404s(request, exception):
+    return BaseController.response_status(404)
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -29,16 +41,16 @@ for view_route in view_route_list:
 
 
 if __name__ == '__main__':
-    orm.sql_debug(True)
+    orm.sql_debug(SQL_DEBUG)
     try:
-        engine.bind("sqlite", "database.sqlite", create_db=True)
+        engine.bind(DB_CLIENT, DB_NAME, create_db=True)
     except Exception as e:
         pass
     else:
         engine.generate_mapping(create_tables=True)
 
     app.run(
-        debug=True,
-        host="0.0.0.0",
-        port=8000
+        debug=DEBUG,
+        host=HOST,
+        port=PORT
     )
