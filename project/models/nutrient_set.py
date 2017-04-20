@@ -1,19 +1,26 @@
-from pony.orm import Optional, PrimaryKey
+from datetime import datetime
+
+from pony.orm import Required, PrimaryKey
 
 from .base import engine
 
 
 class NutrientSet(engine.Entity):
     id = PrimaryKey(str, 32)
-    potassium = Optional(float)
-    phosphorus = Optional(float)
-    nitrogen = Optional(float)
-    organic_material = Optional(float)
-    acidity = Optional(float)
-    magnesium = Optional(float)
-    nanganese = Optional(float)
-    copper = Optional(float)
-    sulfur = Optional(float)
-    aluminum = Optional(float)
-    iron = Optional(float)
-    calcium = Optional(float)
+    created = Required(datetime, sql_default='CURRENT_TIMESTAMP')
+    modified = Required(datetime, sql_default='CURRENT_TIMESTAMP')
+    active = Required(bool, default=True)
+    nitrogen = Required(float, default=0)
+    phosphorus = Required(float, default=0)
+    potassium = Required(float, default=0)
+    magnesium = Required(float, default=0)
+    calcium = Required(float, default=0)
+    sulfur = Required(float, default=0)
+    zinc = Required(float, default=0)
+    manganese = Required(float, default=0)
+    iron = Required(float, default=0)
+    copper = Required(float, default=0)
+    boron = Required(float, default=0)
+    organic_material = Required(float, default=0)
+    acidity = Required(float, default=0)
+    aluminum = Required(float, default=0)

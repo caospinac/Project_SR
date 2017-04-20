@@ -7,10 +7,10 @@ from .base import engine
 
 class Crop(engine.Entity):
     id = PrimaryKey(str, 32)
-    created = Required(datetime, sql_default='CURRENT_TIMESTAMP')
+    created = Required(datetime, sql_type='CURRENT_TIMESTAMP')
     modified = Required(datetime, sql_default='CURRENT_TIMESTAMP')
     active = Required(bool, default=True)
-    crop_name = Required(str, 40)
+    name = Required(str, 40)
 
     lots = Set('Lot')
-    optimals_range_age = Set('Optimal_range_age')
+    optimals_range_age = Set('OptimalRangeAge')
