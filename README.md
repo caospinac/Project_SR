@@ -27,7 +27,7 @@ pip install -r requirements.txt
 ```
 ### Run
 ```
-python project/app.py
+python agronify/app.py
 ```
 ### It will get something like ...
 ```
