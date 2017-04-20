@@ -41,7 +41,14 @@ for view_route in view_route_list:
 if __name__ == '__main__':
     orm.sql_debug(app.config.SQL_DEBUG)
     try:
-        engine.bind(app.config.DB_CLIENT, app.config.DB_NAME, create_db=True)
+        # engine.bind(app.config.DB_CLIENT, app.config.DB_NAME, create_db=True)
+        engine.bind(
+            'postgres',
+            user=app.config.DB_USER,
+            password=app.config.DB_PASSWORD,
+            host=app.config.DB_HOST,
+            database=app.config.DB_NAME
+        )
     except Exception as e:
         pass
     else:

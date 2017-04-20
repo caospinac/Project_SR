@@ -20,7 +20,7 @@ database = {
     'DB_PASSWORD': 'pgsql',
     'DB_PORT': 5432,
     'DB_HOST': 'localhost',
-    'DB_NAME': 'database.sqlite',
+    'DB_NAME': 'agroniify',
     'DB_TEST_NAME': 'test.sqlite',
     'SQL_DEBUG': not PRODUCTION,
 }
