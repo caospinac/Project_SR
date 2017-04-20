@@ -28,6 +28,13 @@ def ignore_404s(request, exception):
 
 @app.route("/", methods=['GET', 'POST'])
 async def index(request):
+    view = env.get_template("building.html")
+    html_content = view.render()
+    return html(html_content)
+
+
+@app.route("/home", methods=['GET', 'POST'])
+async def index(request):
     view = env.get_template("base.html")
     html_content = view.render()
     return html(html_content)
