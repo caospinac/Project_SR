@@ -1,7 +1,6 @@
 from .card import Card
 from .crop import Crop
 from .fertilizer import Fertilizer
-from .fertilizer_price import FertilizerPrice
 from .lab import Lab
 from .land import Land
 from .lot import Lot
