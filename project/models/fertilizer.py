@@ -8,4 +8,4 @@ class Fertilizer(NutrientSet):
     presentation = Required(str, 20)
 
     recomendations = Set('Recomendation')
-    fertilizer_prices = Set('FertilizerPrice')
+    labs = Set('Lab')

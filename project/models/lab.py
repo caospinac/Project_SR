@@ -20,4 +20,4 @@ class Lab(engine.Entity):
     city = Required(str, 32)
     address = Required(str, 40)
 
-    fertilizer_prices = Set('FertilizerPrice')
+    fertilizers = Set('Fertilizer')
