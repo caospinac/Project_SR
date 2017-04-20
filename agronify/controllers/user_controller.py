@@ -1,13 +1,19 @@
 from uuid import uuid4
 from datetime import datetime
 
+from config import SALT
 from .base_controller import BaseController
 from pony.orm import db_session
+from passlib.hash import pbkdf2_sha256
 
 from models import User
 
 
 class UserController(BaseController):
+    @staticmethod
+    def crypt(value):
+        return pbkdf2_sha256.hash(''.join(value, SALT))
+
     async def post(self, request):
         req = request.form
         print(request.form)
@@ -21,7 +27,7 @@ class UserController(BaseController):
                     lastname=req.get('lastname'),
                     email=req.get('email'),
                     phone=req.get('phone'),
-                    password=req.get('password'),
+                    password=self.crypt(req.get('password')),
                     lands=[],
                 )
         except Exception as e:

@@ -37,3 +37,5 @@ database = {
     'DB_TEST_NAME': 'test.sqlite',
     'SQL_DEBUG': not PRODUCTION,
 }
+
+SALT = 'fadfGADGSg5yt576878dsfdfgfg//?¿678.-.-'
