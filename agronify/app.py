@@ -5,11 +5,7 @@ from sanic.exceptions import NotFound, FileNotFound
 from sanic.response import html, json
 from sanic_cors import CORS
 
-from config import (
-    HOST, PORT, DEBUG,
-    DB_CLIENT, DB_NAME,
-    SQL_DEBUG
-)
+from config import database, server
 from controllers import BaseController
 from routes import view_route_list
 from models.base import engine
@@ -17,6 +13,8 @@ from models.base import engine
 
 app = Sanic(__name__)
 app.static("/", "./agronify/static/")
+app.config.update(server)
+app.config.update(database)
 
 env = Environment(
     loader=PackageLoader("app", "views"),
@@ -41,16 +39,16 @@ for view_route in view_route_list:
 
 
 if __name__ == '__main__':
-    orm.sql_debug(SQL_DEBUG)
+    orm.sql_debug(app.config.SQL_DEBUG)
     try:
-        engine.bind(DB_CLIENT, DB_NAME, create_db=True)
+        engine.bind(app.config.DB_CLIENT, app.config.DB_NAME, create_db=True)
     except Exception as e:
         pass
     else:
         engine.generate_mapping(create_tables=True)
 
     app.run(
-        debug=DEBUG,
-        host=HOST,
-        port=PORT
+        debug=app.config.DEBUG,
+        host=app.config.HOST,
+        port=app.config.PORT
     )

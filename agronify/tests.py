@@ -1,9 +1,5 @@
 import sys
 
-from config import (
-    DB_TEST_CLIENT, DB_TEST_NAME,
-    SQL_DEBUG
-)
 from app import app, orm, engine
 
 
@@ -87,9 +83,12 @@ def test_patch_user_if_not_exists():
 
 if __name__ == '__main__':
     test = globals()[sys.argv[1]]
-    orm.sql_debug(SQL_DEBUG)
+    orm.sql_debug(app.config.SQL_DEBUG)
     try:
-        engine.bind(DB_TEST_CLIENT, DB_TEST_NAME, create_db=True)
+        engine.bind(
+            app.config.DB_TEST_CLIENT, app.config.DB_TEST_NAME,
+            create_db=True
+        )
     except Exception as e:
         pass
     else:
