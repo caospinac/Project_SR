@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pony.orm import  Optional, PrimaryKey, Required, Set
+from pony.orm import PrimaryKey, Required, Set
 
 from .base import engine
 

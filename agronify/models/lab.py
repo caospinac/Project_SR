@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from pony.orm import (
-    Optional, PrimaryKey, Required, Set
+    PrimaryKey, Required, Set
 )
 
 from .base import engine
@@ -15,7 +15,7 @@ class Lab(engine.Entity):
     name = Required(str, 40)
     email = Required(str, 64, unique=True)
     web = Required(str, nullable=True)
-    lab_phone = Required(str, 13)
+    phone = Required(str, 13)
     department = Required(str, 32)
     city = Required(str, 32)
     address = Required(str, 40)
