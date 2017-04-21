@@ -1,7 +1,7 @@
 from uuid import uuid4
 from datetime import datetime
 
-from pony.orm import db_session, select, count
+from pony.orm import db_session, select
 from passlib.hash import pbkdf2_sha256
 
 from config import SALT
