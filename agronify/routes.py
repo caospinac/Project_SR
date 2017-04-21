@@ -3,7 +3,6 @@ from controllers import (
     CardController as Card,
     CropController as Crop,
     FertilizerController as Fertilizer,
-    FertilizerPriceController as FertilizerPrice,
     LabController as Lab,
     LandController as Land,
     LotController as Lot,
@@ -15,47 +14,46 @@ from controllers import (
 from controllers.auth import SignInController as SignIn
 
 
-view_route_list = [
+api_routes = [
 
     # Base routes
-    (Base.as_view(), '/base'),
+    (Base.as_view(), '/api/base'),
 
     # Base routes
-    (Base.as_view(), '/base/<arg>'),
+    (Base.as_view(), '/api/base/<arg>'),
 
     # Card routes
-    (Card.as_view(), '/card'),
+    (Card.as_view(), '/api/card'),
 
     # Crop routes
-    (Crop.as_view(), '/crop'),
+    (Crop.as_view(), '/api/crop'),
 
     # Fertilizer routes
-    (Fertilizer.as_view(), '/fertilizer'),
-
-    # FertilizerPrice routes
-    (FertilizerPrice.as_view(), '/fertilizer_price'),
+    (Fertilizer.as_view(), '/api/fertilizer'),
 
     # Lab routes
-    (Lab.as_view(), '/lab'),
+    (Lab.as_view(), '/api/lab'),
+    (Lab.as_view(), '/api/lab/<id:\w{32}>'),
+    (Lab.as_view(), '/api/lab/<id:all>'),
 
     # Land routes
     (Land.as_view(), '/api/land'),
-    (Land.as_view(), '/land/<id:\w{32}>'),
-    (Land.as_view(), '/land/<id:all>'),
+    (Land.as_view(), '/api/land/<id:\w{32}>'),
+    (Land.as_view(), '/api/land/<id:all>'),
 
     # Lot routes
-    (Lot.as_view(), '/lot'),
-    (Lot.as_view(), '/lot/<id:\w{32}>'),
-    (Lot.as_view(), '/lot/<id:all>'),
+    (Lot.as_view(), '/api/lot'),
+    (Lot.as_view(), '/api/lot/<id:\w{32}>'),
+    (Lot.as_view(), '/api/lot/<id:all>'),
 
     # NutrientSet routes
-    (NutrientSet.as_view(), '/nutrientset'),
+    (NutrientSet.as_view(), '/api/nutrientset'),
 
     # OptimalRangeAge routes
-    (OptimalRangeAge.as_view(), '/optimal_range_age'),
+    (OptimalRangeAge.as_view(), '/api/optimal_range_age'),
 
     # Recomendation routes
-    (Recomendation.as_view(), '/recomendation'),
+    (Recomendation.as_view(), '/api/recomendation'),
 
     # User routes
     (User.as_view(), '/api/user'),
