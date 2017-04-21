@@ -3,7 +3,8 @@ from pony import orm
 from sanic import Sanic
 from sanic.exceptions import NotFound, FileNotFound
 from sanic.response import html, json
-from sanic_cors import CORS
+# from sanic_cors import CORS
+from sanic_session import InMemorySessionInterface
 
 from config import database, server
 from controllers import BaseController
@@ -20,10 +21,26 @@ env = Environment(
     loader=PackageLoader("app", "views"),
 )
 
+session_interface = InMemorySessionInterface()
+
 
 @app.exception(NotFound, FileNotFound)
 def ignore_404s(request, exception):
     return BaseController.response_status(404)
+
+
+@app.middleware('request')
+async def add_session_to_request(request):
+    # before each request initialize a session
+    # using the client's request
+    await session_interface.open(request)
+
+
+@app.middleware('response')
+async def save_session(request, response):
+    # after each request save the session,
+    # pass the response to set client cookies
+    await session_interface.save(request, response)
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -41,7 +58,7 @@ async def index(request):
 
 
 for view_route in view_route_list:
-    CORS(app)
+    # CORS(app)
     app.add_route(*view_route)
 
 
