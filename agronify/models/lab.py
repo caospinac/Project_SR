@@ -8,15 +8,13 @@ from .base import engine
 
 
 class Lab(engine.Entity):
-    _table_ = '_Lab'
-
     id = PrimaryKey(str, 32)
     created = Required(datetime, sql_default='CURRENT_TIMESTAMP')
     active = Required(bool, default=True)
     modified = Required(datetime, sql_default='CURRENT_TIMESTAMP')
     name = Required(str, 40)
-    email = Optional(str, 64)
-    web = Optional(str)
+    email = Required(str, 64, unique=True)
+    web = Required(str, nullable=True)
     lab_phone = Required(str, 13)
     department = Required(str, 32)
     city = Required(str, 32)

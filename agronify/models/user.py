@@ -19,6 +19,6 @@ class User(engine.Entity):
     lastname = Required(str, 40)
     email = Required(str, 64, unique=True)
     password = Required(str)
-    phone = Optional(str, 15)
+    phone = Required(str, 15)
 
     lands = Set('Land', cascade_delete=True)
