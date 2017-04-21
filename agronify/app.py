@@ -3,7 +3,7 @@ from pony import orm
 from sanic import Sanic
 from sanic.exceptions import NotFound, FileNotFound
 from sanic.response import html, json
-from sanic_cors import CORS
+# from sanic_cors import CORS
 from sanic_session import InMemorySessionInterface
 
 from config import database, server
@@ -21,9 +21,7 @@ env = Environment(
     loader=PackageLoader("app", "views"),
 )
 
-session_interface = InMemorySessionInterface(
-    expiry=0, httponly=False, cookie_name="uct", prefix="usess:"
-)
+session_interface = InMemorySessionInterface()
 
 
 @app.exception(NotFound, FileNotFound)
@@ -60,7 +58,7 @@ async def index(request):
 
 
 for view_route in view_route_list:
-    CORS(app)
+    # CORS(app)
     app.add_route(*view_route)
 
 

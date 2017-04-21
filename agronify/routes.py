@@ -12,6 +12,7 @@ from controllers import (
     RecomendationController as Recomendation,
     UserController as User
 )
+from controllers.auth import SignInController as SignIn
 
 
 view_route_list = [
@@ -38,7 +39,7 @@ view_route_list = [
     (Lab.as_view(), '/lab'),
 
     # Land routes
-    (Land.as_view(), '/land'),
+    (Land.as_view(), '/api/land'),
     (Land.as_view(), '/land/<id:\w{32}>'),
     (Land.as_view(), '/land/<id:all>'),
 
@@ -57,7 +58,10 @@ view_route_list = [
     (Recomendation.as_view(), '/recomendation'),
 
     # User routes
-    (User.as_view(), '/user'),
-    (User.as_view(), '/user/<id:\w{32}>'),
-    (User.as_view(), '/user/<id:all>'),
+    (User.as_view(), '/api/user'),
+    (User.as_view(), '/api/user/<id:\w{32}>'),
+    (User.as_view(), '/api/user/<id:all>'),
+
+    # SignIn routes
+    (SignIn.as_view(), '/api/sign-in'),
 ]
