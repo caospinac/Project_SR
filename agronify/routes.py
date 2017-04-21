@@ -3,7 +3,6 @@ from controllers import (
     CardController as Card,
     CropController as Crop,
     FertilizerController as Fertilizer,
-    FertilizerPriceController as FertilizerPrice,
     LabController as Lab,
     LandController as Land,
     LotController as Lot,
@@ -31,9 +30,6 @@ api_routes = [
 
     # Fertilizer routes
     (Fertilizer.as_view(), '/api/fertilizer'),
-
-    # FertilizerPrice routes
-    (FertilizerPrice.as_view(), '/api/fertilizer_price'),
 
     # Lab routes
     (Lab.as_view(), '/api/lab'),
