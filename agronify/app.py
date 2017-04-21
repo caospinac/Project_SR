@@ -8,7 +8,7 @@ from sanic_session import InMemorySessionInterface
 
 from config import database, server
 from controllers import BaseController
-from routes import view_route_list
+from routes import api_routes
 from models.base import engine
 
 
@@ -57,9 +57,9 @@ async def index(request):
     return html(html_content)
 
 
-for view_route in view_route_list:
+for api_route in api_routes:
     # CORS(app)
-    app.add_route(*view_route)
+    app.add_route(*api_route)
 
 
 if __name__ == '__main__':

@@ -20,6 +20,14 @@ class BaseController(HTTPMethodView):
             print(e)
             return json({})
 
+    @staticmethod
+    def not_null_data(**kw):
+        return dict(
+            (k, v)
+            for k, v in kw.items()
+            if v
+        )
+
     async def post(self, request, arg=None):
         return self.response_status(501)
 

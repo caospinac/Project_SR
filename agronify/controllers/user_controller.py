@@ -1,11 +1,11 @@
 from uuid import uuid4
 from datetime import datetime
 
-from config import SALT
-from .base_controller import BaseController
-from pony.orm import db_session, select
+from pony.orm import db_session, select, count
 from passlib.hash import pbkdf2_sha256
 
+from config import SALT
+from .base_controller import BaseController
 from models import User
 
 
@@ -21,13 +21,15 @@ class UserController(BaseController):
                 if User.exists(email=req.get('email')):
                     return self.response_status(409)
                 User(
-                    id=uuid4().hex,
-                    firstname=req.get('firstname'),
-                    lastname=req.get('lastname'),
-                    email=req.get('email'),
-                    phone=req.get('phone'),
-                    password=self.crypt(req.get('password')),
-                    lands=[],
+                    **self.not_null_data(
+                        id=uuid4().hex,
+                        firstname=req.get('firstname'),
+                        lastname=req.get('lastname'),
+                        email=req.get('email'),
+                        phone=req.get('phone'),
+                        password=self.crypt(req.get('password')),
+                        lands=[],
+                    )
                 )
         except Exception as e:
             raise e
@@ -37,12 +39,18 @@ class UserController(BaseController):
         with db_session:
             if id == 'all':
                 return self.response_status(
-                    200, select(u.id for u in User if u.active)
+                    200, select(
+                        (u.id, u.firstname, u.lastname, u.email, u.phone)
+                        for u in User if u.active
+                    )
                 )
             if not User.exists(id=id):
                 return self.response_status(404)
             return self.response_status(
-                200, User.select_by_sql('SELECT * FROM "_User" WHERE id = $id')
+                200, select(
+                    (u.firstname, u.lastname, u.email, u.phone)
+                    for u in User if u.id == id and u.active
+                )
             )
 
     async def patch(self, request, id):
@@ -54,21 +62,15 @@ class UserController(BaseController):
                 return self.response_status(409)
             try:
                 User.get_for_update(id=id)
-                User[id].set(
-                    **dict(
-                        (k, v)
-                        for k, v in dict(
-                            modified=datetime.now(),
-                            firstname=req.get('firstname'),
-                            lastname=req.get('lastname'),
-                            email=req.get('email'),
-                            phone=req.get('phone'),
-                            password=self.crypt(req.get('password')),
-                        ).items()
-                        if v
-                    )
+                changes = self.not_null_data(
+                    modified=datetime.now(),
+                    firstname=req.get('firstname'),
+                    lastname=req.get('lastname'),
+                    email=req.get('email'),
+                    phone=req.get('phone'),
                 )
-                return self.response_status(200, User[id])
+                User[id].set(**changes)
+                return self.response_status(200, changes)
             except Exception as e:
                 return self.response_status(202)
 
@@ -85,4 +87,4 @@ class UserController(BaseController):
             except Exception as e:
                 return self.response_status(500)
             else:
-                return self.response_status(200, User[id])
+                return self.response_status(200, User[id].id)
