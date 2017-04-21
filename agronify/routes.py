@@ -37,6 +37,8 @@ api_routes = [
 
     # Lab routes
     (Lab.as_view(), '/api/lab'),
+    (Lab.as_view(), '/api/lab/<id:\w{32}>'),
+    (Lab.as_view(), '/api/lab/<id:all>'),
 
     # Land routes
     (Land.as_view(), '/api/land'),
