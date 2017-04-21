@@ -8,6 +8,8 @@ from .base import engine
 
 
 class Lab(engine.Entity):
+    _table_ = '_Lab'
+
     id = PrimaryKey(str, 32)
     created = Required(datetime, sql_default='CURRENT_TIMESTAMP')
     active = Required(bool, default=True)

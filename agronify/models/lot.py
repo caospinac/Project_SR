@@ -6,6 +6,8 @@ from .base import engine
 
 
 class Lot(engine.Entity):
+    _table_ = '_Lot'
+
     id = PrimaryKey(str, 32)
     created = Required(datetime, sql_default='CURRENT_TIMESTAMP')
     modified = Required(datetime, sql_default='CURRENT_TIMESTAMP')

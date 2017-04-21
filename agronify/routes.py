@@ -40,8 +40,8 @@ view_route_list = [
 
     # Land routes
     (Land.as_view(), '/api/land'),
-    (Land.as_view(), '/land/<id:\w{32}>'),
-    (Land.as_view(), '/land/<id:all>'),
+    (Land.as_view(), '/api/land/<id:\w{32}>'),
+    (Land.as_view(), '/api/land/<id:all>'),
 
     # Lot routes
     (Lot.as_view(), '/lot'),

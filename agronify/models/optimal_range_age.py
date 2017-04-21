@@ -4,6 +4,8 @@ from .nutrient_set import NutrientSet
 
 
 class OptimalRangeAge(NutrientSet):
+    _discriminator_ = '_OptimalRangeAge'
+
     min = Required(float)
     max = Required(float)
 

@@ -16,7 +16,6 @@ class UserController(BaseController):
 
     async def post(self, request):
         req = request.form
-        print(request.form)
         try:
             with db_session:
                 if User.exists(email=req.get('email')):
@@ -42,7 +41,9 @@ class UserController(BaseController):
                 )
             if not User.exists(id=id):
                 return self.response_status(404)
-            return self.response_status(200, User[id])
+            return self.response_status(
+                200, User.select_by_sql('SELECT * FROM "_User" WHERE id = $id')
+            )
 
     async def patch(self, request, id):
         req = request.form
