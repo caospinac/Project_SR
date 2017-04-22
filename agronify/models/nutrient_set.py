@@ -10,17 +10,17 @@ class NutrientSet(engine.Entity):
     created = Required(datetime, sql_default='CURRENT_TIMESTAMP')
     modified = Required(datetime, sql_default='CURRENT_TIMESTAMP')
     active = Required(bool, default=True)
-    nitrogen = Required(float, default=0)
-    phosphorus = Required(float, default=0)
-    potassium = Required(float, default=0)
-    magnesium = Required(float, default=0)
-    calcium = Required(float, default=0)
-    sulfur = Required(float, default=0)
-    zinc = Required(float, default=0)
-    manganese = Required(float, default=0)
-    iron = Required(float, default=0)
-    copper = Required(float, default=0)
-    boron = Required(float, default=0)
-    organic_material = Required(float, default=0)
-    acidity = Required(float, default=0)
-    aluminum = Required(float, default=0)
+    n = Required(float, default=0)   # nitrogen
+    p = Required(float, default=0)  # phosphorus
+    k = Required(float, default=0)  # potassium
+    mg = Required(float, default=0)  # magnesium
+    ca = Required(float, default=0)    # calcium
+    s = Required(float, default=0)  # sulfur
+    zn = Required(float, default=0)   # zinc
+    mn = Required(float, default=0)  # manganese
+    fe = Required(float, default=0)   # iron
+    cu = Required(float, default=0)  # copper
+    b = Required(float, default=0)  # boron
+    organic_material = Required(float, default=0)   # organic_material
+    acidity = Required(float, default=0)    # acidity
+    aluminum = Required(float, default=0)   # aluminum
