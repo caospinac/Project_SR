@@ -5,7 +5,7 @@ import pandas as pd
 from pony.orm import db_session
 
 from config import database as db
-from models import engine, Lab, Fertilizer
+from models import engine, Lab, Fertilizer, NutrientSet
 
 
 def normalize_dict(data):
@@ -30,10 +30,16 @@ def parse(labs_record, products_record):
             for product in products_record
             if product['lab_code'] == lab['code']
         ):
-            new_product = product.copy()
-            del new_product['code']
-            del new_product['lab_code']
-            products.append(normalize_dict(new_product))
+            nutrient_set = product.copy()
+            del nutrient_set['code']
+            del nutrient_set['lab_code']
+            fertilizer = {
+                'name': nutrient_set.pop('name', ''),
+                'presentation': nutrient_set.pop('presentation', '')
+            }
+            products.append(
+                (normalize_dict(fertilizer), normalize_dict(nutrient_set))
+            )
     return labs, products
 
 
@@ -61,7 +67,7 @@ def not_null_data(**kw):
         )
 
 
-def do_insert(entity_class, data):
+def do_insert(entity_class, **data):
     return entity_class(id=uuid4().hex, **not_null_data(**data))
 
 
@@ -84,7 +90,10 @@ if __name__ == '__main__' and connect():
     final_labs, final_products = parse(labs_record, products_record)
     with db_session:
         for rl in final_labs:
-            lab = do_insert(Lab, rl)
+            lab = do_insert(Lab, **rl)
             for rp in final_products:
-                fertilizer = do_insert(Fertilizer, rp)
+                nutrient_set = do_insert(NutrientSet, **rp[1])
+                fertilizer = do_insert(
+                    Fertilizer, nutrient_set=nutrient_set, **rp[0]
+                )
                 fertilizer.labs.add(lab)

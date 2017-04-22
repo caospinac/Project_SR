@@ -13,4 +13,3 @@ class Crop(engine.Entity):
     name = Required(str, 40)
 
     lots = Set('Lot')
-    optimals_range_age = Set('OptimalRangeAge')

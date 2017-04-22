@@ -1,13 +1,14 @@
 from datetime import datetime
 
-from pony.orm import Required, Set
+from pony.orm import PrimaryKey, Required, Set
 
-from .nutrient_set import NutrientSet
+from .base import engine
 
 
-class Card(NutrientSet):
-    crop_age = Required(float)
+class Card(engine.Entity):
+    id = PrimaryKey(str, 32)
     date = Required(datetime, sql_default='CURRENT_TIMESTAMP')
 
     lot = Required('Lot')
+    nutrient_set = Required('NutrientSet')
     recomendations = Set('Recomendation')
