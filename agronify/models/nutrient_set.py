@@ -16,7 +16,7 @@ class NutrientSet(engine.Entity):
     mg = Required(float, default=0)  # magnesium
     ca = Required(float, default=0)  # calcium
     s = Required(float, default=0)  # sulfur
-    zn = Required(float, column='zinc', default=0)
+    zn = Required(float, default=0)  # zinc
     mn = Required(float, default=0)  # manganese
     fe = Required(float, default=0)  # iron
     cu = Required(float, default=0)  # copper

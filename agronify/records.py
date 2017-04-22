@@ -5,7 +5,7 @@ import pandas as pd
 from pony.orm import db_session
 
 from config import database as db
-from models import engine, Lab, Fertilizer, NutrientSet
+from models import engine, Lab, Fertilizer, NutrientSet, Ideal
 
 
 def normalize_dict(data):
@@ -80,15 +80,17 @@ if __name__ == '__main__' and connect():
     products = pd.read_excel(
         file, sheetname='products', na_values='str', keep_default_na=False
     )
-    optimals = pd.read_excel(
-        file, sheetname='optimals', na_values='str', keep_default_na=False
+    ideals = pd.read_excel(
+        file, sheetname='ideals', na_values='str', keep_default_na=False
     )
 
     labs_record = labs.to_dict(orient='record')
     products_record = products.to_dict(orient='record')
+    ideals_record = ideals.to_dict(orient='record')
 
     final_labs, final_products = parse(labs_record, products_record)
     with db_session:
+        print("Labs and products...")
         for rl in final_labs:
             lab = do_insert(Lab, **rl)
             for rp in final_products:
@@ -97,3 +99,7 @@ if __name__ == '__main__' and connect():
                     Fertilizer, nutrient_set=nutrient_set, **rp[0]
                 )
                 fertilizer.labs.add(lab)
+    with db_session:
+        print("Ideals...")
+        for ro in ideals_record:
+            do_insert(Ideal, **ro)
