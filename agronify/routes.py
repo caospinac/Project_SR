@@ -31,6 +31,8 @@ api_routes = [
 
     # Fertilizer routes
     (Fertilizer.as_view(), '/api/fertilizer'),
+    (Fertilizer.as_view(), '/api/fertilizer/<id:\w{32}>'),
+    (Fertilizer.as_view(), '/api/fertilizer/<id:all>'),
 
     # Lab routes
     (Lab.as_view(), '/api/lab'),

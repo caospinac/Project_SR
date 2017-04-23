@@ -18,7 +18,7 @@ app.config.update(server)
 app.config.update(database)
 
 env = Environment(
-    loader=PackageLoader("app", "views"),
+    loader=PackageLoader("app", "templates"),
 )
 
 session_interface = InMemorySessionInterface()
@@ -51,7 +51,7 @@ async def index(request):
 
 
 @app.route("/home", methods=['GET', 'POST'])
-async def index(request):
+async def home(request):
     view = env.get_template("base.html")
     html_content = view.render()
     return html(html_content)

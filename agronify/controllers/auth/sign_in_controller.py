@@ -21,4 +21,5 @@ class SignInController(BaseController):
         if not login or not us:
             return self.response_status(401)
         request['session']['user'] = us.id
+        request['session']['auth'] = "user" if not us.admin else "admin"
         return self.response_status(200, us)
