@@ -6,7 +6,7 @@ from .base import engine
 
 
 class User(engine.Entity):
-    _table_ = '_User'
+    _table_ = '_user'
 
     id = PrimaryKey(str, 32)
     created = Required(datetime, sql_default='CURRENT_TIMESTAMP')

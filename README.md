@@ -20,7 +20,24 @@ cd Project_SR/
 python3.6 -m venv venv
 source venv/bin/activate
 ```
-### Install requeriments
+### PostgreSQL
+```
+sudo apt install postgresql postgresql-client postgresql-contrib
+sudo apt install libpq-dev
+sudo -u postgres psql postgres
+```
+#### Configure password
+In the postgres CLI...
+```
+\password postgres
+\q
+```
+#### Install pgAdmin III
+```
+sudo apt install pgadmin3
+```
+*In Postgres, the database must exist before mapping o run the project*
+In the virtual environment...
 ```
 pip install --upgrade pip
 pip install -r requirements.txt

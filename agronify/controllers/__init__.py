@@ -4,8 +4,7 @@ from .crop_controller import CropController
 from .fertilizer_controller import FertilizerController
 from .lab_controller import LabController
 from .land_controller import LandController
-from .lot_controller import LotController
 from .nutrient_set_controller import NutrientSetController
-from .optimal_range_age_controller import OptimalRangeAgeController
+from .ideal_controller import IdealController
 from .recomendation_controller import RecomendationController
 from .user_controller import UserController

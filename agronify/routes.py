@@ -5,9 +5,8 @@ from controllers import (
     FertilizerController as Fertilizer,
     LabController as Lab,
     LandController as Land,
-    LotController as Lot,
     NutrientSetController as NutrientSet,
-    OptimalRangeAgeController as OptimalRangeAge,
+    IdealController as Ideal,
     RecomendationController as Recomendation,
     UserController as User
 )
@@ -27,6 +26,8 @@ api_routes = [
 
     # Crop routes
     (Crop.as_view(), '/api/crop'),
+    (Crop.as_view(), '/api/crop/<id:\w{32}>'),
+    (Crop.as_view(), '/api/crop/<id:all>'),
 
     # Fertilizer routes
     (Fertilizer.as_view(), '/api/fertilizer'),
@@ -41,16 +42,11 @@ api_routes = [
     (Land.as_view(), '/api/land/<id:\w{32}>'),
     (Land.as_view(), '/api/land/<id:all>'),
 
-    # Lot routes
-    (Lot.as_view(), '/api/lot'),
-    (Lot.as_view(), '/api/lot/<id:\w{32}>'),
-    (Lot.as_view(), '/api/lot/<id:all>'),
-
     # NutrientSet routes
     (NutrientSet.as_view(), '/api/nutrientset'),
 
-    # OptimalRangeAge routes
-    (OptimalRangeAge.as_view(), '/api/optimal_range_age'),
+    # Ideal routes
+    (Ideal.as_view(), '/api/ideal'),
 
     # Recomendation routes
     (Recomendation.as_view(), '/api/recomendation'),
