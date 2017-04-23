@@ -37,6 +37,8 @@ In the postgres CLI...
 sudo apt install pgadmin3
 ```
 *In Postgres, the database must exist before mapping o run the project*
+<hr>
+
 In the virtual environment...
 ```
 pip install --upgrade pip
