@@ -9,6 +9,6 @@ class Card(engine.Entity):
     id = PrimaryKey(str, 32)
     date = Required(datetime, sql_default='CURRENT_TIMESTAMP')
 
-    lot = Required('Lot')
     nutrient_set = Required('NutrientSet')
     recomendations = Set('Recomendation')
+    crop = Required('Crop')

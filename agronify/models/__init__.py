@@ -3,7 +3,6 @@ from .crop import Crop
 from .fertilizer import Fertilizer
 from .lab import Lab
 from .land import Land
-from .lot import Lot
 from .nutrient_set import NutrientSet
 from .ideal import Ideal
 from .recomendation import Recomendation

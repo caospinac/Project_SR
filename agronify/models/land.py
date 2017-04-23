@@ -16,4 +16,4 @@ class Land(engine.Entity):
     address = Required(str)
 
     user = Required('User')
-    lots = Set('Lot')
+    crops = Set('Crop')
