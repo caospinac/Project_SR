@@ -10,7 +10,10 @@ from controllers import (
     RecomendationController as Recomendation,
     UserController as User
 )
-from controllers.auth import SignInController as SignIn
+from controllers.auth import (
+    SignInController as SignIn,
+    SignOutController as SignOut
+)
 
 
 api_routes = [
@@ -60,4 +63,7 @@ api_routes = [
 
     # SignIn routes
     (SignIn.as_view(), '/api/sign-in'),
+
+    # SignOut routes
+    (SignOut.as_view(), '/api/sign-out'),
 ]
