@@ -1,4 +1,4 @@
-(function ($) {
+$(function() {
                 
     // Navigation scrolls
     $('.navbar-nav li a').bind('click', function(event) {
@@ -25,4 +25,4 @@
             window.location.hash = hash;
         });
     });
-})(jQuery);
+});
