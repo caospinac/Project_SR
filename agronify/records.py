@@ -60,11 +60,11 @@ def connect():
 
 
 def not_null_data(**kw):
-        return dict(
-            (k, v)
-            for k, v in kw.items()
-            if v
-        )
+    return dict(
+        (k, v)
+        for k, v in kw.items()
+        if v
+    )
 
 
 def do_insert(entity_class, **data):

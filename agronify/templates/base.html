@@ -19,7 +19,7 @@
         Author URL: https://bootstrapmade.com
     ======================================================= -->
   </head>
-  <body>
+  <body id="page-top">
   {% block body %}
     <!--Navigation bar-->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -30,16 +30,18 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/home">Agro<span>nify</span></a>
+        <a class="navbar-brand" href="#page-top">Agro<span>nify</span></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
+        {% block sections %}
           <li><a href="#feature">Características</a></li>
-          <li><a href="#organisations">Organisations</a></li>
+          <li><a href="#faculity-member">Faculity member</a></li>
           <li><a href="#courses">Courses</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#" data-target="#login" data-toggle="modal">Ingresar</a></li>
           <li class="btn-trial"><a href="#footer">Registrarse</a></li>
+        {% endblock sections %}
         </ul>
         </div>
       </div>
@@ -58,7 +60,7 @@
           <div class="modal-body padtrbl">
 
             <div class="login-box-body">
-              <p class="login-box-msg">Sign in to start your session</p>
+              <p class="login-box-msg">Accede para comenzar tu sesión</p>
               <div class="form-group">
                 <form name="" id="loginForm">
                  <div class="form-group has-feedback"> <!-- username -->
@@ -93,6 +95,7 @@
     </div>
     <!--/ Modal box-->
     <!--Banner-->
+    {% block banner %}
     <div class="banner">
       <div class="bg-color">
         <div class="container">
@@ -112,8 +115,10 @@
         </div>
       </div>
     </div>
+    {% endblock banner %}
     <!--/ Banner-->
     <!--Feature-->
+    {% block secctionsbody %}
     <section id ="feature" class="section-padding">
       <div class="container">
         <div class="row">
@@ -161,7 +166,8 @@
       </div>
     </section>
     <!--/ feature-->
-    <!--Organisations-->
+    <!--Organizations-->
+    {% block organizations %}
     <section id ="organisations" class="section-padding">
       <div class="container">
         <div class="row">
@@ -200,6 +206,7 @@
         </div>
       </div>
     </section>
+    {% endblock organizations %}
     <!--/ Organisations-->
     <!--Cta-->
     <section id="cta-2">
@@ -520,8 +527,10 @@
         </div>
       </div>
     </section>
+    {% endblock secctionsbody %}
     <!--/ Contact-->
     <!--Footer-->
+    {% block footer %}
     <footer id="footer" class="footer">
       <div class="container text-center">
     
@@ -580,6 +589,7 @@
         </div>
       </div>
     </footer>
+    {% endblock footer %}
     <!--/ Footer-->
     
     <script src="js/jquery.min.js"></script>
