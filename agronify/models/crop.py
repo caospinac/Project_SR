@@ -12,7 +12,7 @@ class Crop(engine.Entity):
     active = Required(bool, default=True)
     name = Required(str, 40)
     lot_name = Required(str, 64, default='Unnamed')
-    lot_size = Optional(float)
+    lot_size = Required(float)
 
     land = Required('Land')
     cards = Set('Card')

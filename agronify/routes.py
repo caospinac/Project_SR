@@ -10,7 +10,10 @@ from controllers import (
     RecomendationController as Recomendation,
     UserController as User
 )
-from controllers.auth import SignInController as SignIn
+from controllers.auth import (
+    SignInController as SignIn,
+    SignOutController as SignOut
+)
 
 
 api_routes = [
@@ -22,25 +25,27 @@ api_routes = [
     (Base.as_view(), '/api/base/<arg>'),
 
     # Card routes
-    (Card.as_view(), '/api/card'),
+    (Card.as_view(), '/api/cards'),
 
     # Crop routes
-    (Crop.as_view(), '/api/crop'),
-    (Crop.as_view(), '/api/crop/<id:\w{32}>'),
-    (Crop.as_view(), '/api/crop/<id:all>'),
+    (Crop.as_view(), '/api/crops'),
+    (Crop.as_view(), '/api/crops/<id:\w{32}>'),
+    (Crop.as_view(), '/api/crops/<id:all>'),
 
     # Fertilizer routes
-    (Fertilizer.as_view(), '/api/fertilizer'),
+    (Fertilizer.as_view(), '/api/fertilizers'),
+    (Fertilizer.as_view(), '/api/fertilizers/<id:\w{32}>'),
+    (Fertilizer.as_view(), '/api/fertilizers/<id:all>'),
 
     # Lab routes
-    (Lab.as_view(), '/api/lab'),
-    (Lab.as_view(), '/api/lab/<id:\w{32}>'),
-    (Lab.as_view(), '/api/lab/<id:all>'),
+    (Lab.as_view(), '/api/labs'),
+    (Lab.as_view(), '/api/labs/<id:\w{32}>'),
+    (Lab.as_view(), '/api/labs/<id:all>'),
 
     # Land routes
-    (Land.as_view(), '/api/land'),
-    (Land.as_view(), '/api/land/<id:\w{32}>'),
-    (Land.as_view(), '/api/land/<id:all>'),
+    (Land.as_view(), '/api/lands'),
+    (Land.as_view(), '/api/lands/<id:\w{32}>'),
+    (Land.as_view(), '/api/lands/<id:all>'),
 
     # NutrientSet routes
     (NutrientSet.as_view(), '/api/nutrientset'),
@@ -52,10 +57,13 @@ api_routes = [
     (Recomendation.as_view(), '/api/recomendation'),
 
     # User routes
-    (User.as_view(), '/api/user'),
-    (User.as_view(), '/api/user/<id:\w{32}>'),
-    (User.as_view(), '/api/user/<id:all>'),
+    (User.as_view(), '/api/users'),
+    (User.as_view(), '/api/users/<id:\w{32}>'),
+    (User.as_view(), '/api/users/<id:all>'),
 
     # SignIn routes
     (SignIn.as_view(), '/api/sign-in'),
+
+    # SignOut routes
+    (SignOut.as_view(), '/api/sign-out'),
 ]

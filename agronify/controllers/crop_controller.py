@@ -11,9 +11,9 @@ from models import Crop, Land
 class CropController(BaseController):
     async def post(self, request):
         user = request['session'].get('user')
-        req_land = request.args['land'][0]
         if not user:
             return self.response_status(401)
+        req_land = request.args.get('land')
         req = request.form
         try:
             with db_session:
@@ -40,25 +40,19 @@ class CropController(BaseController):
             return self.response_status(401)
         with db_session:
             if id == 'all':
+                req_land = request.args.get('land')
                 return self.response_status(
-                    200, select(
-                        (x.id, x.name, x.lot_name, x.lot_size)
-                        for x in Crop
-                        if x.land == Land[req_land] and x.active
-                    )
+                    200, Crop.select(lambda x: x.land.id == req_land)
                 )
             if not Crop.exists(id=id):
                 return self.response_status(404)
             return self.response_status(
-                200, select(
-                    (x.name, x.size)
-                    for x in Crop if x.id == id and x.active
-                )
+                200, Crop[id]
             )
 
     async def patch(self, request, id):
         user = request['session'].get('user')
-        if not land:
+        if not user:
             return self.response_status(401)
         with db_session:
             if not Crop.exists(id=id):
@@ -74,7 +68,8 @@ class CropController(BaseController):
                         for k, v in dict(
                             modified=datetime.now(),
                             name=req.get('name'),
-                            size=req.get('size'),
+                            lot_name=req.get('lot_name'),
+                            lot_size=req.get('lot_size'),
                         ).items()
                         if v
                     )
@@ -85,8 +80,8 @@ class CropController(BaseController):
                 return self.response_status(202)
 
     async def delete(self, request, id):
-        land = request['session'].get('land')
-        if not land:
+        user = request['session'].get('user')
+        if not user:
             return self.response_status(401)
         with db_session:
             if not Crop.exists(id=id):
@@ -95,11 +90,8 @@ class CropController(BaseController):
                 return self.response_status(401)
             try:
                 Crop.get_for_update(id=id)
-                Crop[id].set(
-                    modified=datetime.now(),
-                    active=False
-                )
+                Crop[id].delete()
             except Exception as e:
-                raise e
+                self.response_status(500)
             else:
-                return self.response_status(200, Crop[id].id)
+                return self.response_status(200)

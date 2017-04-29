@@ -1,5 +1,7 @@
 from http import HTTPStatus
 
+from pony.orm.serialization import to_dict
+from pony.orm.core import Query
 from sanic.views import HTTPMethodView
 from sanic.response import json
 
@@ -14,7 +16,7 @@ class BaseController(HTTPMethodView):
                 'status': status.phrase,
                 'description': status.description,
                 'code': status.value,
-                'data': data
+                'data': to_dict(data) if type(data) == Query else data
             }, status=status.value)
         except KeyError as e:
             print(e)

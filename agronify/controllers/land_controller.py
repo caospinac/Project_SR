@@ -38,19 +38,14 @@ class LandController(BaseController):
         with db_session:
             if id == 'all':
                 return self.response_status(
-                    200, select(
-                        (l.id, l.name, l.state, l.city, l.address)
-                        for l in Land
-                        if l.user == User[user] and l.active
+                    200, Land.select(
+                        lambda x: x.user.id == user and x.active
                     )
                 )
             if not Land.exists(id=id):
                 return self.response_status(404)
             return self.response_status(
-                200, select(
-                    (l.name, l.state, l.city, l.address)
-                    for l in Land if l.id == id and l.active
-                )
+                200, Land.select(lambda x: x.id == id and x.active)
             )
 
     async def patch(self, request, id):
@@ -102,4 +97,4 @@ class LandController(BaseController):
             except Exception as e:
                 raise e
             else:
-                return self.response_status(200, Land[id].id)
+                return self.response_status(200, Land[id])
