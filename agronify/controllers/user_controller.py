@@ -39,18 +39,12 @@ class UserController(BaseController):
         with db_session:
             if id == 'all':
                 return self.response_status(
-                    200, select(
-                        (u.id, u.firstname, u.lastname, u.email, u.phone)
-                        for u in User if u.active
-                    )
+                    200, User.select()
                 )
             if not User.exists(id=id):
                 return self.response_status(404)
             return self.response_status(
-                200, select(
-                    (u.firstname, u.lastname, u.email, u.phone)
-                    for u in User if u.id == id and u.active
-                )
+                200, User.select(lambda x: x.id == id and x.active)
             )
 
     async def patch(self, request, id):
@@ -87,4 +81,4 @@ class UserController(BaseController):
             except Exception as e:
                 return self.response_status(500)
             else:
-                return self.response_status(200, User[id].id)
+                return self.response_status(200, User[id])

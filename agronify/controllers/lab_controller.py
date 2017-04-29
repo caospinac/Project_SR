@@ -36,20 +36,12 @@ class LabController(BaseController):
         with db_session:
             if id == 'all':
                 return self.response_status(
-                    200, select(
-                        (x.id, x.name, x.email, x.web, x.phone,
-                            x.department, x.city, x.address)
-                        for x in Lab if x.active
-                    )
+                    200, Lab.select(lambda x: x.active)
                 )
             if not Lab.exists(id=id):
                 return self.response_status(404)
             return self.response_status(
-                200, select(
-                    (x.id, x.name, x.email, x.web, x.phone,
-                        x.department, x.city, x.address)
-                    for x in Lab if x.id == id and x.active
-                )
+                200, Lab.select(x.id == id and x.active)
             )
 
     async def patch(self, request, id):
@@ -89,4 +81,4 @@ class LabController(BaseController):
             except Exception as e:
                 return self.response_status(500)
             else:
-                return self.response_status(200, Lab[id].id)
+                return self.response_status(200, Lab[id])

@@ -47,18 +47,12 @@ class FertilizerController(BaseController):
         with db_session:
             if id == 'all':
                 return self.response_status(
-                    200, select(
-                        (x.id, x.name, x.presentation)
-                        for x in Fertilizer
-                    )[:10]
+                    200, Fertilizer.select()[:10]
                 )
             if not Fertilizer.exists(id=id):
                 return self.response_status(404)
             return self.response_status(
-                200, select(
-                    (x.name, x.presentation)
-                    for x in Fertilizer if x.id == id
-                )
+                200, Fertilizer[id]
             )
 
     async def patch(self, request, id):
