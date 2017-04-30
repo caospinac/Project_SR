@@ -9,6 +9,7 @@ from sanic_session import InMemorySessionInterface
 from config import database, server
 from controllers import BaseController
 from routes import api_routes
+from models import User
 from models.base import engine
 
 
@@ -70,7 +71,9 @@ async def home(request):
     if not user:
         return redirect(app.url_for('index'))
     return html(
-        env.get_template("User/home.html").render()
+        env.get_template("User/home.html").render(
+            name=User[user].name
+        )
     )
 
 
