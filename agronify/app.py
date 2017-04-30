@@ -1,5 +1,6 @@
 from jinja2 import Environment, PackageLoader
 from pony import orm
+from pony.orm import db_session
 from sanic import Sanic
 from sanic.exceptions import NotFound, FileNotFound
 from sanic.response import html, json, redirect
@@ -70,11 +71,12 @@ async def home(request):
     user = request['session'].get('user')
     if not user:
         return redirect(app.url_for('index'))
-    return html(
-        env.get_template("User/home.html").render(
-            name=User[user].name
+    with db_session:
+        return html(
+            env.get_template("User/home.html").render(
+                name=User[user].name
+            )
         )
-    )
 
 
 for api_route in api_routes:
