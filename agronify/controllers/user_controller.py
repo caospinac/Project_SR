@@ -20,7 +20,7 @@ class UserController(BaseController):
             with db_session:
                 if User.exists(email=req.get('email')):
                     return self.response_status(409)
-                User(
+                us = User(
                     **self.not_null_data(
                         id=uuid4().hex,
                         firstname=req.get('firstname'),
