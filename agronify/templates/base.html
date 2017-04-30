@@ -61,7 +61,7 @@
             <div class="login-box-body">
               <p class="login-box-msg">Accede para comenzar tu sesión</p>
               <div class="form-group">
-                <form name="" id="loginForm">
+                <form method="post" accept-charset="utf-8" action="/api/sign-in" name="" id="loginForm">
                  <div class="form-group has-feedback"> <!-- username -->
                       <input class="form-control" placeholder="Correo electrónico" name="email" id="loginid" type="text" autocomplete="off" /> 
      
@@ -71,9 +71,8 @@
 
                   </div>
                   <div class="row">
-
                       <div class="col-xs-12">
-                          <button type="button" class="btn btn-green btn-block btn-flat" onclick="userLogin()">Ingresar</button>
+                          <input type="submit" class="btn btn-green btn-block btn-flat" id="buttonLogin" value="Ingresar"></input>
                       </div>
                   </div>
                 </form>
@@ -102,18 +101,18 @@
             <div class="login-box-body">
               <p class="login-box-msg">Ingresa tus datos
               <div class="form-group">
-                <form name="" id="loginForm">
+                <form name="" id="registerForm">
                 <!--Nombres-->
                 <div class="form-group has-feedback">
-                  <input class="form-control" placeholder="Nombres" name="nombres" type="text"  /> 
+                  <input class="form-control" placeholder="Nombres" name="firstname" type="text"  /> 
                 </div>
                 <!--Apellidos-->
                 <div class="form-group has-feedback">
-                  <input class="form-control" placeholder="Apellidos" name="apellidos" type="text"  /> 
+                  <input class="form-control" placeholder="Apellidos" name="lastname" type="text"  /> 
                 </div>
                 <!--telefono-->
                 <div class="form-group has-feedback">
-                  <input class="form-control" placeholder="Telefono" name="telefono" type="text"  /> 
+                  <input class="form-control" placeholder="Telefono" name="phone" type="text"  /> 
                 </div>
 
                 <!--Correo-->
@@ -126,7 +125,7 @@
                       <input class="form-control" placeholder="Contraseña" name="password" id="loginpsw2" type="password" autocomplete="off" />
 
                   </div>
-                  <!--Contraseña-->
+                  <!--Contraseña2-->
                   <div class="form-group has-feedback">
                       <input class="form-control" placeholder="Confirmar Contraseña" name="password2" id="loginpsw" type="password" autocomplete="off" />
 
@@ -135,7 +134,7 @@
                   <div class="row">
 
                       <div class="col-xs-12">
-                          <button type="button" class="btn btn-green btn-block btn-flat" onclick="userRegister()">Ingresar</button>
+                          <input type="submit" class="btn btn-green btn-block btn-flat" value="Ingresar"></input>
                       </div>
                   </div>
                 </form>
@@ -147,31 +146,63 @@
       </div>
     </div>
     <!--/ Modal box-->
-
+eq
 
 
 
     <!--Banner-->
     {% block banner %}
-    <div class="banner" id="inicio">
+    
+       <div class="banner" id="inicio">
       <div class="bg-color">
         <div class="container">
           <div class="row">
-            <div class="banner-text text-center">
-              <div class="text-border">
-                <h2 class="text-dec">Trust &amp; Quality</h2>
+          <form>
+              <div class="banner-text text-center">
+                <div class="text-border">
+                <br>
+                <br>
+                  <div class="row">
+                    <div class="col-md-4">
+                       <input type="number" class="form-control" id="n" name="n" placeholder="Nitrogen" autocomplete="off">
+                      <br>
+                      <input type="number" class="form-control" id="p" name="p" placeholder="Phosphorus" autocomplete="off">
+                      <br>
+                      <input type="number" class="form-control" id="k" name="k" placeholder="Potassium" autocomplete="off">
+                      <br>
+                      <input type="number" class="form-control" id="mg" name="mg" placeholder="Magnesium" autocomplete="off">
+                      <br>
+                      <input type="number" class="form-control" id="ca" name="ca" placeholder="Calcium" autocomplete="off">
+                    </div>
+                    <div class="col-md-4">
+                      <input type="number" class="form-control" id="s" name="s" placeholder="Sulfur" autocomplete="off">
+                      <br>
+                      <input type="number" class="form-control" id="zn" name="zn" placeholder="Zinc" autocomplete="off">
+                      <br>
+                      <input type="number" class="form-control" id="mn" name="mn" placeholder="Manganese" autocomplete="off">
+                      <br>
+                      <input type="number" class="form-control" id="fe" name="fe" placeholder="Iron" autocomplete="off">
+                    </div>
+                    <div class="col-md-4">
+                       <input type="number" class="form-control" id="cu" name="cu" placeholder="Copper" autocomplete="off">
+                       <br>
+                        <input type="number" class="form-control" id="b" name="b" placeholder="Boron" autocomplete="off">
+                        <br>
+                        <input type="text" class="form-control" id="organic_material" name="organic_material" placeholder="Organic_material" autocomplete="off">
+                        <br>
+                        <input type="number" class="form-control" id="acidity" name="acidity" placeholder="Acidity" autocomplete="off">
+                        </div>
+                    </div>
+                  <a href="#." class="btn">Recomendar</a>
+                </div>
+    
               </div>
-              <div class="intro-para text-center quote">
-                <p class="big-text">Learning Today . . . Leading Tomorrow.</p>
-                <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium enim repellat sapiente quos architecto<br>Laudantium enim repellat sapiente quos architecto</p>
-                <a href="#." class="btn">GET A QUOTE</a>
-              </div>
-              <a href="#feature" class="mouse-hover"><div class="mouse"></div></a>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
+   
     {% endblock banner %}
     <!--/ Banner-->
     <!--Feature-->
@@ -380,11 +411,10 @@
     
       
       <ul class="social-links">
-        <li><a href="#link"><i class="fa fa-twitter fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-facebook fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-google-plus fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-dribbble fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-linkedin fa-fw"></i></a></li>
+        <img src="img/unal.png" width="250px"></img>
+        <img src="img/tos.png" width="180px"></img>
+        <img src="img/gaia.jpg" width="250px"></img>
+        
       </ul>
         ©2016 Agronify. All rights reserved
         <div class="credits">
@@ -394,7 +424,7 @@
                 Licensing information: https://bootstrapmade.com/license/
                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Mentor
             -->
-            Designed by <a href="https://bootstrapmade.com/">Free Bootstrap Themes</a>
+            <center>Designed by: Carlos A. Ospina ** Cristian J. Galvis ** Yeison Aguirre</center>
         </div>
       </div>
     </footer>
@@ -405,7 +435,6 @@
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
-    <script src="contactform/contactform.js"></script>
     {% endblock %}
   </body>
 </html>

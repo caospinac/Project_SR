@@ -2,7 +2,7 @@ from jinja2 import Environment, PackageLoader
 from pony import orm
 from sanic import Sanic
 from sanic.exceptions import NotFound, FileNotFound
-from sanic.response import html, json
+from sanic.response import html, json, redirect
 # from sanic_cors import CORS
 from sanic_session import InMemorySessionInterface
 
@@ -66,14 +66,12 @@ async def index(request):
 
 @app.route("/home", methods=['GET', 'POST'])
 async def home(request):
+    user = request['session'].get('user')
+    if not user:
+        return redirect(app.url_for('index'))
     return html(
-        env.get_template("home.html").render()
+        env.get_template("User/home.html").render()
     )
-
-
-@app.route("/sign-in", methods=['GET', 'POST'])
-async def home(request):
-    response = 
 
 
 for api_route in api_routes:

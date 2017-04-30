@@ -110,6 +110,12 @@ Navigation bar
 /***********************************
 Banner
 ************************************/
+
+.form-control,.row {
+    margin: 500;
+
+}
+
 .banner{
 	background: url('../img/bg-banner.jpg') no-repeat center top;
     background-size: cover;
@@ -552,11 +558,11 @@ Footer
 ************************************/
 .footer {
     padding: 60px 0 20px;
-    background: #111;
-    color: #ccc;
+    background: #5fcf80;
+    color: #111;
 }
 .footer a {
-    color: #fff;
+    color: #5fcf80;
 }
 
 .footer h3{
@@ -568,7 +574,7 @@ Footer
 .footer .form-control {
     border-radius: 30px;
     border: none;
-    background: rgba(255,255,255,.1);
+    
     padding-left: 30px;
     color: #e5e6e7;
     margin-bottom: 0;
