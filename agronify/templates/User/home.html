@@ -1,15 +1,34 @@
 {% extends 'base.html' %}
 
+{% block title2 %}
+ <a class="navbar-brand" href="#inicio">Agro<span>nify</span></a>
+{% endblock title2 %}
+
 {% block sections %}
-  <li><a href="#inicio">Mis recomendaciones</a></li>
+  <li><a href="/recomendaciones">Mis recomendaciones</a></li>
   <li><a href="/fincas">Mis fincas</a></li>
-  <li><a href="#lotes">Mis Lotes</a></li>
-  <li><a href="#perfil">{{name}}</a></li>
+  <li><a href="/lotes">Mis Cultivos</a></li>
+  <li><a href="/perfil">{{name}}</a></li>
   <li class="btn-trial"><a href="/api/sing-out" id="singOutUser">Salir</a></li>
 {% endblock sections %}
 
 {% block banner %}
+<div class="banner" id="inicio">
+  <div class="bg-color">
+    <div class="container">
+      <div class="row">
+      <form>
+          <div class="banner-text text-center">
+            <div class="text-border">
+                <H1>BIENVENIDO</H1>
+            </div>
 
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock banner %}
 
 {% block secctionsbody %}
