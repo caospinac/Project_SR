@@ -31,6 +31,8 @@ class UserController(BaseController):
                         lands=[],
                     )
                 )
+                request['session']['user'] = us.id
+                request['session']['auth'] = "user" if not us.admin else "admin"
         except Exception as e:
             raise e
         return self.response_status(201)
