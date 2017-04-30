@@ -74,7 +74,7 @@ async def home(request):
     with db_session:
         return html(
             env.get_template("User/home.html").render(
-                name=User[user].name
+                name=User[user].firstname
             )
         )
 

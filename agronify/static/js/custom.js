@@ -47,17 +47,15 @@ $(function() {
         e.preventDefault();
         var formdata = $(this).serializeArray();
         console.log(formdata);
-        $.ajax({
+        d = $.ajax({
             url: "/api/users",
             type: 'POST',
             dataType: 'application/json',
-            data: formdata,
-            success: function(data)
-            {
-                
-            }
+            data: formdata
 
         });
+
+        $(location).attr('href', '/home')
        
 
     });

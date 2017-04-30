@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>Fincas</h2>
+ 
+  <div class="table-responsive">          
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Departamento</th>
+        <th>Ciudad</th>
+        <th>Direccion</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% set i=0 }
+    {% for land in lands %}
+    {% set i=i+1 %}
+      <tr>
+        <td>{{ i }}</td>
+        <td>{{ land.name }}</td>
+        <td>{{ land.state }}</td>
+        <td>{{ land.city }}</td>
+        <td>{{ land.address }}</td>
+        <td><button type="button" class="btn btn-warning btn-sm">Editar</button><button type="button" class="btn btn-warning btn-sm">Eliminar</button></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
