@@ -71,6 +71,11 @@ async def home(request):
     )
 
 
+@app.route("/sign-in", methods=['GET', 'POST'])
+async def home(request):
+    response = 
+
+
 for api_route in api_routes:
     # CORS(app)
     app.add_route(*api_route)
