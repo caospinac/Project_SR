@@ -29,6 +29,20 @@ def ignore_404s(request, exception):
     return BaseController.response_status(404)
 
 
+@app.middleware('response')
+async def cors_headers(request, response):
+    cors_headers = {
+        'access-control-allow-origin': '*',
+        'access-control-allow-headers': 'Accept, Content-Type',
+        'access-control-allow-methods': '*'
+    }
+    if response.headers is None or isinstance(response.headers, list):
+        response.headers = cors_headers
+    elif isinstance(response.headers, dict):
+        response.headers.update(cors_headers)
+    return response
+
+
 @app.middleware('request')
 async def add_session_to_request(request):
     # before each request initialize a session
@@ -45,16 +59,16 @@ async def save_session(request, response):
 
 @app.route("/", methods=['GET', 'POST'])
 async def index(request):
-    view = env.get_template("building.html")
-    html_content = view.render()
-    return html(html_content)
+    return html(
+        env.get_template("base.html").render()
+    )
 
 
 @app.route("/home", methods=['GET', 'POST'])
 async def home(request):
-    view = env.get_template("base.html")
-    html_content = view.render()
-    return html(html_content)
+    return html(
+        env.get_template("home.html").render()
+    )
 
 
 for api_route in api_routes:
