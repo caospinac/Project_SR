@@ -2,7 +2,7 @@ from controllers import BaseController
 
 
 class SignOutController(BaseController):
-    async def post(self, request):
+    async def get(self, request):
         try:
             del request['session']['user']
             del request['session']['auth']

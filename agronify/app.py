@@ -3,7 +3,7 @@ from pony import orm
 from pony.orm import db_session
 from sanic import Sanic
 from sanic.exceptions import NotFound, FileNotFound
-from sanic.response import html, json, redirect
+from sanic.response import html
 # from sanic_cors import CORS
 from sanic_session import InMemorySessionInterface
 
@@ -66,19 +66,6 @@ async def index(request):
     )
 
 
-@app.route("/home", methods=['GET', 'POST'])
-async def home(request):
-    user = request['session'].get('user')
-    if not user:
-        return redirect(app.url_for('index'))
-    with db_session:
-        return html(
-            env.get_template("User/home.html").render(
-                name=User[user].firstname
-            )
-        )
-
-
 for api_route in api_routes:
     # CORS(app)
     app.add_route(*api_route)
@@ -103,5 +90,6 @@ if __name__ == '__main__':
     app.run(
         debug=app.config.DEBUG,
         host=app.config.HOST,
-        port=app.config.PORT
+        port=app.config.PORT,
+        workers=2,
     )
