@@ -1,14 +1,16 @@
 from jinja2 import Environment, PackageLoader
 from pony import orm
+from pony.orm import db_session
 from sanic import Sanic
 from sanic.exceptions import NotFound, FileNotFound
-from sanic.response import html, json
+from sanic.response import html, redirect
 # from sanic_cors import CORS
 from sanic_session import InMemorySessionInterface
 
 from config import database, server
 from controllers import BaseController
 from routes import api_routes
+from models import User
 from models.base import engine
 
 
@@ -29,6 +31,20 @@ def ignore_404s(request, exception):
     return BaseController.response_status(404)
 
 
+@app.middleware('response')
+async def cors_headers(request, response):
+    cors_headers = {
+        'access-control-allow-origin': '*',
+        'access-control-allow-headers': 'Accept, Content-Type',
+        'access-control-allow-methods': '*'
+    }
+    if response.headers is None or isinstance(response.headers, list):
+        response.headers = cors_headers
+    elif isinstance(response.headers, dict):
+        response.headers.update(cors_headers)
+    return response
+
+
 @app.middleware('request')
 async def add_session_to_request(request):
     # before each request initialize a session
@@ -45,16 +61,19 @@ async def save_session(request, response):
 
 @app.route("/", methods=['GET', 'POST'])
 async def index(request):
-    view = env.get_template("building.html")
-    html_content = view.render()
-    return html(html_content)
+    return html(
+        env.get_template("index.html").render()
+    )
 
 
-@app.route("/home", methods=['GET', 'POST'])
-async def home(request):
-    view = env.get_template("base.html")
-    html_content = view.render()
-    return html(html_content)
+@app.route("/sign-out", methods=['GET', 'POST'])
+async def sign_out(request):
+    try:
+        del request['session']['user']
+        del request['session']['auth']
+    except KeyError as e:
+        pass
+    return redirect("/home")
 
 
 for api_route in api_routes:
@@ -81,5 +100,6 @@ if __name__ == '__main__':
     app.run(
         debug=app.config.DEBUG,
         host=app.config.HOST,
-        port=app.config.PORT
+        port=app.config.PORT,
+        workers=1,
     )

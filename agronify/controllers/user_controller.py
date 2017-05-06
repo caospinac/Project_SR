@@ -20,7 +20,7 @@ class UserController(BaseController):
             with db_session:
                 if User.exists(email=req.get('email')):
                     return self.response_status(409)
-                User(
+                us = User(
                     **self.not_null_data(
                         id=uuid4().hex,
                         firstname=req.get('firstname'),
@@ -31,6 +31,8 @@ class UserController(BaseController):
                         lands=[],
                     )
                 )
+                request['session']['user'] = us.id
+                request['session']['auth'] = "user" if not us.admin else "admin"
         except Exception as e:
             raise e
         return self.response_status(201)
