@@ -3,7 +3,7 @@ from pony import orm
 from pony.orm import db_session
 from sanic import Sanic
 from sanic.exceptions import NotFound, FileNotFound
-from sanic.response import html
+from sanic.response import html, redirect
 # from sanic_cors import CORS
 from sanic_session import InMemorySessionInterface
 
@@ -62,8 +62,18 @@ async def save_session(request, response):
 @app.route("/", methods=['GET', 'POST'])
 async def index(request):
     return html(
-        env.get_template("base.html").render()
+        env.get_template("index.html").render()
     )
+
+
+@app.route("/sign-out", methods=['GET', 'POST'])
+async def sign_out(request):
+    try:
+        del request['session']['user']
+        del request['session']['auth']
+    except KeyError as e:
+        pass
+    return redirect("/home")
 
 
 for api_route in api_routes:
@@ -91,5 +101,5 @@ if __name__ == '__main__':
         debug=app.config.DEBUG,
         host=app.config.HOST,
         port=app.config.PORT,
-        workers=2,
+        workers=1,
     )

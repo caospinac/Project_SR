@@ -5,8 +5,6 @@ from controllers import (
     FertilizerController as Fertilizer,
     LabController as Lab,
     LandController as Land,
-    NutrientSetController as NutrientSet,
-    IdealController as Ideal,
     RecomendationController as Recomendation,
     UserController as User
 )
@@ -46,12 +44,6 @@ api_routes = [
     (Land.as_view(), '/api/lands'),
     (Land.as_view(), '/api/lands/<id:\w{32}>'),
     (Land.as_view(), '/api/lands/<id:all>'),
-
-    # NutrientSet routes
-    (NutrientSet.as_view(), '/api/nutrientset'),
-
-    # Ideal routes
-    (Ideal.as_view(), '/api/ideal'),
 
     # Recomendation routes
     (Recomendation.as_view(), '/api/recomendation'),
