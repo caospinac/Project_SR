@@ -24,6 +24,8 @@ api_routes = [
 
     # Card routes
     (Card.as_view(), '/api/cards'),
+    (Card.as_view(), '/api/cards/<id:\w{32}>'),
+    (Card.as_view(), '/api/cards/<id:all>'),
 
     # Crop routes
     (Crop.as_view(), '/api/crops'),
